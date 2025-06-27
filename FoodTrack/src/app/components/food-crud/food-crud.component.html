@@ -1,0 +1,141 @@
+<div class="min-h-screen bg-gray-50 p-4">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">FoodTrack - Gerenciamento de Cardápio</h1>
+      <p class="text-gray-600">Gerencie os itens do seu cardápio de forma simples e eficiente</p>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="mb-6 flex gap-2">
+      <button 
+        type="button"
+        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+        (click)="openNew()">
+        Novo Item
+      </button>
+      <button 
+        type="button"
+        class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        (click)="deleteSelectedFoods()"
+        [disabled]="!selectedFoods || !selectedFoods.length">
+        Excluir Selecionados
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto rounded-lg shadow bg-white">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-4 py-2">
+              <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event.target.checked)" />
+            </th>
+            <th class="px-4 py-2">Nome</th>
+            <th class="px-4 py-2">Categoria</th>
+            <th class="px-4 py-2">Preço</th>
+            <th class="px-4 py-2">Calorias</th>
+            <th class="px-4 py-2">Status</th>
+            <th class="px-4 py-2">Vegetariano</th>
+            <th class="px-4 py-2">Ações</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let food of foods">
+            <td class="px-4 py-2 text-center">
+              <input type="checkbox" [checked]="isSelected(food)" (change)="onSelectFood(food, $event.target.checked)" />
+            </td>
+            <td class="px-4 py-2">
+              <div class="flex items-center gap-3">
+                <img [src]="food.imageUrl || '/placeholder.svg?height=40&width=40'" [alt]="food.name" width="40" height="40" class="rounded-lg object-cover" />
+                <div>
+                  <span class="font-semibold">{{food.name}}</span>
+                  <div class="text-sm text-gray-500 mt-1">{{food.description | slice:0:50}}...</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-2">
+              <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">{{food.category}}</span>
+            </td>
+            <td class="px-4 py-2 font-semibold">R$ {{food.price | number:'1.2-2'}}</td>
+            <td class="px-4 py-2">{{food.calories}} kcal</td>
+            <td class="px-4 py-2">
+              <span [ngClass]="food.isAvailable ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'" class="inline-block text-xs px-2 py-1 rounded">
+                {{getAvailabilityText(food.isAvailable)}}
+              </span>
+            </td>
+            <td class="px-4 py-2 text-center">
+              <span *ngIf="food.isVegetarian" class="text-green-600 font-bold">✔</span>
+              <span *ngIf="!food.isVegetarian" class="text-red-600 font-bold">✘</span>
+            </td>
+            <td class="px-4 py-2 flex gap-2">
+              <button type="button" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded" (click)="editFood(food)">Editar</button>
+              <button type="button" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" (click)="deleteFood(food)">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="p-4 text-gray-600">Total de {{foods ? foods.length : 0 }} itens no cardápio.</div>
+    </div>
+
+    <!-- Dialog Form -->
+    <div *ngIf="foodDialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+      <div class="bg-white rounded-lg shadow-lg w-full max-w-xl p-6 relative">
+        <h2 class="text-xl font-bold mb-4">Detalhes do Item</h2>
+        <form (ngSubmit)="saveFood()">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="name" class="font-semibold">Nome *</label>
+              <input type="text" id="name" [(ngModel)]="food.name" name="name" required autofocus class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" [class.border-red-500]="submitted && !food.name" />
+              <small class="text-red-500" *ngIf="submitted && !food.name">Nome é obrigatório.</small>
+            </div>
+            <div>
+              <label for="category" class="font-semibold">Categoria *</label>
+              <select id="category" [(ngModel)]="food.category" name="category" required class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="" disabled selected>Selecione uma categoria</option>
+                <option *ngFor="let cat of categories" [value]="cat.value">{{cat.label}}</option>
+              </select>
+            </div>
+            <div>
+              <label for="price" class="font-semibold">Preço *</label>
+              <input type="number" id="price" [(ngModel)]="food.price" name="price" required class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div>
+              <label for="calories" class="font-semibold">Calorias</label>
+              <input type="number" id="calories" [(ngModel)]="food.calories" name="calories" class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+          </div>
+          <div class="mt-4">
+            <label for="description" class="font-semibold">Descrição</label>
+            <textarea id="description" [(ngModel)]="food.description" name="description" rows="3" class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          </div>
+          <div class="mt-4">
+            <label for="ingredients" class="font-semibold">Ingredientes (separados por vírgula)</label>
+            <input type="text" id="ingredients" [(ngModel)]="food.ingredientsString" name="ingredients" class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Digite os ingredientes" />
+          </div>
+          <div class="mt-4">
+            <label for="imageUrl" class="font-semibold">URL da Imagem</label>
+            <input type="text" id="imageUrl" [(ngModel)]="food.imageUrl" name="imageUrl" class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div class="flex gap-4 mt-4">
+            <div class="flex items-center">
+              <input type="checkbox" id="vegetarian" [(ngModel)]="food.isVegetarian" name="isVegetarian" class="mr-2" />
+              <label for="vegetarian">Vegetariano</label>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" id="available" [(ngModel)]="food.isAvailable" name="isAvailable" class="mr-2" />
+              <label for="available">Disponível</label>
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 mt-6">
+            <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded" (click)="hideDialog()">Cancelar</button>
+            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Messages -->
+<p-toast></p-toast>
