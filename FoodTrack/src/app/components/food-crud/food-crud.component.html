@@ -29,7 +29,7 @@
         <thead class="bg-gray-50">
           <tr>
             <th class="px-4 py-2">
-              <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($event.target.checked)" />
+              <input type="checkbox" [checked]="isAllSelected()" (change)="toggleSelectAll($any($event.target).checked)" />
             </th>
             <th class="px-4 py-2">Nome</th>
             <th class="px-4 py-2">Categoria</th>
@@ -43,7 +43,7 @@
         <tbody class="bg-white divide-y divide-gray-200">
           <tr *ngFor="let food of foods">
             <td class="px-4 py-2 text-center">
-              <input type="checkbox" [checked]="isSelected(food)" (change)="onSelectFood(food, $event.target.checked)" />
+              <input type="checkbox" [checked]="isSelected(food)" (change)="onSelectFood(food, $any($event.target).checked)" />
             </td>
             <td class="px-4 py-2">
               <div class="flex items-center gap-3">
@@ -111,7 +111,7 @@
           </div>
           <div class="mt-4">
             <label for="ingredients" class="font-semibold">Ingredientes (separados por vírgula)</label>
-            <input type="text" id="ingredients" [(ngModel)]="food.ingredientsString" name="ingredients" class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Digite os ingredientes" />
+            <input type="text" id="ingredients" [(ngModel)]="ingredientsString" name="ingredients" class="w-full mt-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Digite os ingredientes" />
           </div>
           <div class="mt-4">
             <label for="imageUrl" class="font-semibold">URL da Imagem</label>
@@ -136,6 +136,3 @@
     </div>
   </div>
 </div>
-
-<!-- Toast Messages -->
-<p-toast></p-toast>

@@ -21,6 +21,7 @@ export class FoodCrudComponent implements OnInit {
 
   foodDialog = false
   submitted = false
+  ingredientsString = '';
 
   categories: FoodCategory[] = [
     { label: "Pizza", value: "Pizza" },
@@ -41,6 +42,7 @@ export class FoodCrudComponent implements OnInit {
 
   openNew() {
     this.food = this.getEmptyFood()
+    this.ingredientsString = '';
     this.submitted = false
     this.foodDialog = true
   }
@@ -59,6 +61,7 @@ export class FoodCrudComponent implements OnInit {
 
   editFood(food: Food) {
     this.food = { ...food }
+    this.ingredientsString = (food.ingredients || []).join(', ');
     this.foodDialog = true
   }
 
@@ -78,7 +81,7 @@ export class FoodCrudComponent implements OnInit {
 
   saveFood() {
     this.submitted = true
-
+    this.food.ingredients = this.ingredientsString.split(',').map(i => i.trim()).filter(i => i);
     if (this.food.name?.trim()) {
       if (this.food.id) {
         this.foodService.updateFood(this.food)
@@ -87,9 +90,9 @@ export class FoodCrudComponent implements OnInit {
         this.foodService.addFood(this.food)
         alert("Item criado com sucesso")
       }
-
       this.foodDialog = false
       this.food = this.getEmptyFood()
+      this.ingredientsString = '';
     }
   }
 
