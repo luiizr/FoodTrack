@@ -5,6 +5,9 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 
+// Components Imports
+import { HeaderComponent } from '../libs/components/header/header'
+
 // PrimeNG Imports
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -32,6 +35,7 @@ import { MenuItem } from 'primeng/api';
     StepsModule,
     TagModule,
     MenubarModule,
+    HeaderComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
