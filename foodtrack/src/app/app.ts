@@ -5,8 +5,13 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 
+<<<<<<< HEAD
 // Components Imports
 import { HeaderComponent } from '../libs/components/header/header'
+=======
+// Component Imports
+import { HeaderModule } from '../libs/components/header/header'
+>>>>>>> b4aafb5bfe82a98c8317d4d6fc9ddeb75ca05495
 
 // PrimeNG Imports
 import { ButtonModule } from 'primeng/button';
@@ -35,7 +40,11 @@ import { MenuItem } from 'primeng/api';
     StepsModule,
     TagModule,
     MenubarModule,
+<<<<<<< HEAD
     HeaderComponent,
+=======
+    HeaderModule
+>>>>>>> b4aafb5bfe82a98c8317d4d6fc9ddeb75ca05495
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
