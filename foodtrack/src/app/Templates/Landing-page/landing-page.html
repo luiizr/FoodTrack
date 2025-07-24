@@ -1,28 +1,4 @@
 <app-header></app-header>
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between items-center h-16">
-            <div class="flex items-center space-x-2">
-              <i class="pi pi-heart-fill text-primary-500 text-2xl"></i>
-              <span class="text-xl font-bold text-gray-800">NutriTrack</span>
-            </div>
-            
-            <div class="hidden md:flex items-center space-x-8">
-              <a href="#features" class="text-gray-600 hover:text-primary-500 transition-colors">Recursos</a>
-              <a href="#how-it-works" class="text-gray-600 hover:text-primary-500 transition-colors">Como funciona</a>
-              <a href="#testimonials" class="text-gray-600 hover:text-primary-500 transition-colors">Depoimentos</a>
-                <a href="/login">
-                  <p-button label="Começar Agora" styleClass="p-button-rounded p-button-sm" class="ml-4"></p-button>
-                </a>
-            </div>
-            
-            <button class="md:hidden text-gray-600">
-              <i class="pi pi-bars text-xl"></i>
-            </button>
-          </div>
-        </div>
-      </nav>
   
       <!-- Hero Section -->
       <section class="hero-gradient pt-20 pb-16 lg:pb-24">
@@ -47,19 +23,19 @@
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
 
-              <a href="/planos">
-                <p-button label="Ver Planos"
+                <p-button 
+                routerLink="/planos"
+                label="Ver Planos"
                 icon="pi pi-arrow-right" 
                 styleClass="p-button-lg p-button-rounded gradient-bg text-white border-0"
                 class="text-lg px-8 py-3"></p-button>
-              </a>
 
-              <a href="/crud-teste">
-                <p-button label="Testar grátis" 
+                <p-button 
+                routerLink="/crud-teste"
+                label="Testar grátis" 
                 icon="pi pi-play"
                 styleClass="p-button-lg p-button-rounded p-button-outlined"
                 class="text-lg px-8 py-3"></p-button>
-              </a>
 
             </div>
           </div>

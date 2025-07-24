@@ -7,7 +7,7 @@ import { importProvidersFrom } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // Components
-import { Header } from '../../libs/components/Header/header';
+import { Header } from '../../../libs/components/Header/header';
 
 // PrimeNG Imports
 import { ButtonModule } from 'primeng/button';

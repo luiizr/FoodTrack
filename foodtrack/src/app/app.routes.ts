@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-import { ProductCrudComponent } from '../libs/components/product/product-crud.component';
-import { App } from './app';
+
+// Templates
+import { DashboardTest } from './Templates/Dashboard-Test/dashboardTest';
+import { LandingPage } from './Templates/Landing-page/landing-page';
 
 export const routes: Routes = [
-  { path: '', component: App },
-  { path: 'crud-teste', component: ProductCrudComponent },
+  { path: '', component: LandingPage },
+  { path: 'crud-teste', component: DashboardTest },
 ];
