@@ -1,0 +1,267 @@
+<app-header></app-header>
+  
+      <!-- Hero Section -->
+      <div class="bg-green-100">
+        <section class="hero-gradient pt-20 pb-16 lg:pb-24">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto">
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 mb-6 animate-fade-in">
+                Transforme sua relação com a
+                <span class="gradient-text">alimentação</span>
+              </h1>
+        
+              <div class="ml-16 text-xl sm:text-2xl text-gray-600 mb-8 h-16 flex items-center justify-center">
+                <span class="mr-2">Seja mais</span>
+                <span class="text-bold text-green-600 font-semibold typewriter min-w-[200px] text-left">
+                  {{ currentPhrase }}
+                </span>
+              </div>
+        
+              <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed animate-slide-up">
+                Descubra o poder de uma alimentação consciente com nossa plataforma inteligente.
+                Monitore calorias, macros e alcance seus objetivos de saúde de forma simples e eficiente.
+              </p>
+        
+              <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
+                  <p-button
+                  routerLink="/planos"
+                  label="Ver Planos"
+                  icon="pi pi-arrow-right"
+                  styleClass="p-button-lg p-button-rounded gradient-bg text-white border-0"
+                  class="text-lg px-8 py-3"></p-button>
+                  <p-button
+                  routerLink="/crud-teste"
+                  label="Testar grátis"
+                  icon="pi pi-play"
+                  styleClass="p-button-lg p-button-rounded p-button-outlined"
+                  class="text-lg px-8 py-3"></p-button>
+              </div>
+            </div>
+        
+            <!-- Hero Image/Mockup -->
+            <div class="mt-16 relative max-w-4xl mx-auto">
+              <div class="bg-white rounded-2xl shadow-2xl p-4 transform hover:scale-105 transition-transform duration-500">
+                <img
+                  src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="App Interface"
+                  class="w-full rounded-xl">
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-gray-50">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+              <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+                Por que escolher o <span class="text-primary-500">NutriTrack</span>?
+              </h2>
+              <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Recursos poderosos para revolucionar sua jornada nutricional
+              </p>
+            </div>
+        
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div *ngFor="let feature of features"
+                   class="bg-white rounded-xl p-8 shadow-lg card-hover cursor-pointer">
+                <div class="w-16 h-16 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mb-6">
+                  <i [class]="feature.icon" class="text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">{{ feature.title }}</h3>
+                <p class="text-gray-600 leading-relaxed">{{ feature.description }}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="py-20">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+              <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+                Como <span class="text-primary-500">funciona</span>?
+              </h2>
+              <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Apenas 3 passos simples para começar sua transformação
+              </p>
+            </div>
+        
+            <div class="grid lg:grid-cols-3 gap-12">
+              <div *ngFor="let step of steps; let i = index"
+                   class="text-center group">
+                <div class="relative mb-8">
+                  <div class="w-20 h-20 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                    <span class="text-white text-2xl font-bold">{{ i + 1 }}</span>
+                  </div>
+                  <div *ngIf="i < steps.length - 1"
+                       class="hidden lg:block absolute top-10 left-1/2 w-full h-0.5 bg-gray-200 transform translate-x-1/2 -translate-y-1/2"></div>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">{{ step.title }}</h3>
+                <p class="text-gray-600 leading-relaxed">{{ step.description }}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Stats Section -->
+        <section class="py-20 gradient-bg">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white">
+              <div *ngFor="let stat of stats" class="group">
+                <div class="text-4xl sm:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform">
+                  {{ stat.value }}
+                </div>
+                <div class="text-lg opacity-90">{{ stat.label }}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Screenshots Carousel -->
+        <section class="py-20 bg-gray-50">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+              <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+                Conheça a <span class="text-primary-500">interface</span>
+              </h2>
+              <p class="text-xl text-gray-600">Design intuitivo e funcionalidades poderosas</p>
+            </div>
+        
+            <p-carousel
+              [value]="screenshots"
+              [numVisible]="3"
+              [numScroll]="1"
+              [circular]="true"
+              [autoplayInterval]="3000"
+              [responsiveOptions]="carouselResponsiveOptions">
+              <ng-template let-screenshot pTemplate="item">
+                <div class="p-4">
+                  <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img [src]="screenshot.image" [alt]="screenshot.title" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                      <h4 class="font-semibold text-gray-800 mb-2">{{ screenshot.title }}</h4>
+                      <p class="text-gray-600 text-sm">{{ screenshot.description }}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </div>
+        </section>
+        <!-- Testimonials -->
+        <section id="testimonials" class="py-20">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+              <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+                O que nossos <span class="text-primary-500">usuários</span> dizem
+              </h2>
+              <p class="text-xl text-gray-600">Histórias reais de transformação</p>
+            </div>
+        
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div *ngFor="let testimonial of testimonials"
+                   class="bg-white rounded-xl p-8 shadow-lg card-hover">
+                <div class="flex items-center mb-6">
+                  <p-avatar
+                    [image]="testimonial.avatar"
+                    shape="circle"
+                    size="large"
+                    class="mr-4">
+                  </p-avatar>
+                  <div>
+                    <h4 class="font-semibold text-gray-800">{{ testimonial.name }}</h4>
+                    <p class="text-gray-600 text-sm">{{ testimonial.role }}</p>
+                  </div>
+                </div>
+                <p-rating
+                  [ngModel]="testimonial.rating"
+                  [readonly]="true"
+                  class="mb-4">
+                  <!-- [cancel]="false" -->
+                </p-rating>
+                <p class="text-gray-600 italic leading-relaxed">"{{ testimonial.comment }}"</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="py-20 gradient-bg">
+          <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+              Pronto para transformar sua alimentação?
+            </h2>
+            <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+              Junte-se a milhares de pessoas que já descobriram o poder de uma alimentação consciente
+            </p>
+        
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <p-button
+                label="Começar Gratuitamente"
+                icon="pi pi-arrow-right"
+                styleClass="p-button-lg p-button-rounded bg-white text-primary-500 border-white hover:bg-gray-50"
+                class="text-lg px-8 py-3">
+              </p-button>
+              <p-button
+                label="Falar com Especialista"
+                icon="pi pi-phone"
+                styleClass="p-button-lg p-button-rounded p-button-outlined border-white text-white hover:bg-white/10"
+                class="text-lg px-8 py-3">
+              </p-button>
+            </div>
+          </div>
+        </section>
+      </div>
+  
+      <!-- Footer -->
+      <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid md:grid-cols-4 gap-8">
+            <div>
+              <div class="flex items-center space-x-2 mb-4">
+                <i class="pi pi-heart-fill text-primary-500 text-2xl"></i>
+                <span class="text-xl font-bold">NutriTrack</span>
+              </div>
+              <p class="text-gray-400 leading-relaxed">
+                Transformando vidas através de uma alimentação consciente e inteligente.
+              </p>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-4">Produto</h4>
+              <ul class="space-y-2 text-gray-400">
+                <li><a href="#" class="hover:text-white transition-colors">Recursos</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Preços</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">API</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-4">Suporte</h4>
+              <ul class="space-y-2 text-gray-400">
+                <li><a href="#" class="hover:text-white transition-colors">Central de Ajuda</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Contato</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Status</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 class="font-semibold mb-4">Conecte-se</h4>
+              <div class="flex space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                  <i class="pi pi-facebook text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                  <i class="pi pi-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                  <i class="pi pi-instagram text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 NutriTrack. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </footer>
+  
+  
+  
