@@ -4,9 +4,34 @@
     </div>
     
     <div class="w-full h-auto bg-white/95 backdrop-blur-sm z-50 shadow-sm mt-16">
-        <p>Olá</p>
-        <p>Olá</p>
-        <p>Olá</p>
-        <i class="pi pi-pencil"></i>
-    </div>
+        <div class="flex flex-col gap-4 w-full h-auto justify-center items-center">
+
+    <nz-progress 
+    [nzPercent]="10" 
+    [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
+    nzStatus="active"
+    ></nz-progress>
+    
+    <nz-progress
+      [nzPercent]="50"
+      [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
+      nzStatus="active"
+    ></nz-progress>
+
+
+    <br>
+    <nz-progress
+      nz-tooltip
+      nzType="circle"
+      [nzPercent]="40"
+      [nzSuccessPercent]="40"
+      ></nz-progress>
+    <nz-progress
+      nz-tooltip
+      nzType="dashboard"
+      [nzPercent]="90"
+      [nzSuccessPercent]="90"
+      [nzStrokeColor]="{ '0%': '#108ee9', '100%': '#87d068' }"
+    ></nz-progress>
+        </div>
 </div>
